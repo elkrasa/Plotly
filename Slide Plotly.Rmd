@@ -1,0 +1,27 @@
+---
+title: "Plotly Asiignment"
+author: "elkrasa"
+date: "9/11/2021"
+output: slidy_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Historical rates for USD - RUB. 10 September 2021-1 April 2005.
+#Load plotly package
+```{r,echo=FALSE}
+library(plotly)
+library(readxl)
+```
+##load csv with historical rates for USD - RUB.
+```{r,echo=TRUE}
+Data<-read_excel("Excelrates.xlsx", sheet= "Exchange rates")
+Data$Date <- as.Date(Data$Date)
+```
+#Building a plot
+```{r,echo=TRUE}
+p <- plot_ly(data = Data, x = ~Date, y = ~RUB, color = ~RUB, type="bar") %>% layout(title = "Historical rates for USD - RUB", xaxis=list(title="Date",range = c('2005-04-01','2021-09-10')), yaxis=list(title="USD-RUB",range=c(20:85)))
+p
+```
